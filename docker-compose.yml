@@ -1,0 +1,26 @@
+version: "3.5"
+services:
+  car:
+    container_name: car
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - car-net
+    links:
+      - tarantool:tarantool
+    depends_on:
+      - tarantool
+
+  tarantool:
+    container_name: car-tarantool
+    image: tarantool/tarantool:latest
+    networks:
+      - car-net
+    ports:
+      - "3301:3301"
+networks:
+   car-net:
+    name: car-net
