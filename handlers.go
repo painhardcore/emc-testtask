@@ -37,7 +37,9 @@ func (a *application) set(c echo.Context) error {
 	if err := c.Bind(car); err != nil {
 		return c.String(http.StatusBadRequest, err.Error())
 	}
-
+	if car.Serialnumber == 0 {
+		return c.String(http.StatusBadRequest, "SerialNumber can't be empty")
+	}
 	//Insertion car in database
 	resp, err := a.db.Insert("car", car)
 	if err != nil {
