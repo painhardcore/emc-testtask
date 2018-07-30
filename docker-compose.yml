@@ -1,7 +1,7 @@
 version: "3.5"
 services:
   car:
-    container_name: car
+    container_name: car-srv
     build:
       context: .
       dockerfile: Dockerfile
@@ -15,8 +15,11 @@ services:
       - tarantool
 
   tarantool:
-    container_name: car-tarantool
+    container_name: tarantool
     image: tarantool/tarantool:latest
+    entrypoint: tarantool /opt/tarantool/car.lua
+    volumes: 
+      - ./tarantool/:/opt/tarantool
     networks:
       - car-net
     ports:
