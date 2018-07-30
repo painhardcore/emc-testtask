@@ -9,11 +9,18 @@ import (
 )
 
 func (a *application) get(c echo.Context) error {
-	//get serialnumber from url
+	//get S/N from url
 	serial := c.Param("serialnumber")
+
+	//making uint from string
 	s, err := strconv.ParseUint(serial, 10, 64)
 	if err != nil {
 		return c.String(http.StatusBadRequest, err.Error())
+	}
+
+	// if S/N is zero show noContent
+	if s == 0 {
+		return c.NoContent(http.StatusNoContent)
 	}
 
 	//request to database
