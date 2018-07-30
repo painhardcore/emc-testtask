@@ -1,5 +1,15 @@
 # emc-testtask
 
+### Run
+
+Make sure that you have docker-compose already installed and then:
+
+```
+docker-compose up
+```
+
+
+
 ## GET /car/:serialnumber
 Get car information by serialnumber
 
